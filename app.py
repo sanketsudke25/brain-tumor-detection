@@ -26,8 +26,8 @@ def predict_brain_tumor(img):
 
     pred = model.predict(img)[0][0]
 
-    probability = pred * 100 if pred > 0.5 else (1 - pred) * 100
-    label = "Tumor Detected" if pred > 0.5 else "No Tumor Detected"
+    probability = pred * 100 if pred > 0.75 else (1 - pred) * 100
+    label = "Tumor Detected" if pred > 0.75 else "No Tumor Detected"
 
     return label, probability
 
