@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # ------------------ LOAD MODEL ------------------
-@st.cache_resource(ttl=0)
+@st.cache_resource
 def load_trained_model():
     return load_model("brain_tumor_cnn_model.h5")
 
