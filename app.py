@@ -19,15 +19,18 @@ def load_trained_model():
 model = load_trained_model()
 
 # ------------------ PREDICTION FUNCTION ------------------
-def predict_brain_tumor(img):
-    img = img.resize((64,64))   # Must match training size
+from tensorflow.keras.utils import load_img
+
+def predict_brain_tumor(uploaded_file):
+
+    img = load_img(uploaded_file, target_size=(64,64))  # same as training
     img = img_to_array(img) / 255.0
     img = np.expand_dims(img, axis=0)
 
     pred = model.predict(img)[0][0]
 
-    probability = pred * 100 if pred > 0.75 else (1 - pred) * 100
-    label = "Tumor Detected" if pred > 0.75 else "No Tumor Detected"
+    probability = pred * 100 if pred > 0.5 else (1 - pred) * 100
+    label = "Tumor Detected" if pred > 0.5 else "No Tumor Detected"
 
     return label, probability
 
